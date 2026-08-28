@@ -1,0 +1,31 @@
+#include "iostream"
+#include "fstream"
+using namespace std;
+
+struct PlayerStats {
+    int level;
+    double health;
+    int gold;
+};
+
+int main() {
+    PlayerStats p1 = {5,100.5,500};
+    ofstream pOut("savegame.dat",ios::binary);
+    if(pOut.is_open()) {
+        pOut.write(reinterpret_cast<char*>(&p1), sizeof(PlayerStats));
+        pOut.close();
+    }
+
+    PlayerStats pLoaded;
+    ifstream pIn("savegame.dat", ios::binary);
+
+    if(pIn.is_open()) {
+        pIn.read(reinterpret_cast<char*>(&pLoaded), sizeof(PlayerStats));
+        pIn.close();
+    }
+
+    cout << "---  Save State Loaded ---" << endl;
+    cout << "Level: " << pLoaded.level << endl;
+    cout << "Health: " << pLoaded.health << endl;
+    cout << "Gold: " << pLoaded.gold << endl;
+}
