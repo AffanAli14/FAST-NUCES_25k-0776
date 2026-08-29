@@ -24,35 +24,43 @@
     1. The Patient Hierarchy: A base Patient entity has a medicalID (integer) set when they enter the hospital.
     
     Rule: An Inpatient is a Patient. An ERPatient is a Patient.
+    
     Rule: An IntensiveCarePatient acts as both an Inpatient and an ERPatient simultaneously, combining all their traits.
+    
     Crucial Rule: Even though an Intensive Care patient merges two roles, they are still a single human being. Your architecture must guarantee that an IntensiveCarePatient has exactly one physical medicalID in memory. Demonstrate how their constructor bypasses the intermediate roles to set this ID directly.
     
     2. The Triage Utility:
     
     Rule: Write a generic medical utility tool called prioritize. It must accept any two entities, provided they are of the exact same data type.
+    
     Rule: Inside this utility, call a method .getSeverityScore() on both entities. Return the entity that has the higher score.
     
     3. The Archiving System:
     
     Rule: The hospital tracks basic data using a simple entity called VitalRecord (containing int patientID and double heartRate). Create an array of exactly 50 VitalRecord objects.
+    
     Rule: Save the entire array to a file named archive.dat exactly as it appears in RAM—as a single, raw block of memory bytes in one direct operation. Do not format it using standard text insertion operators.
 
-12. Concepts: Generic Data Structures, Polymorphism, and Standard System Errors.
+13. Concepts: Generic Data Structures, Polymorphism, and Standard System Errors.
 
     You are programming the autonomous management system for a futuristic smart farm.
     
     1. The Storage Facility:
     
     Rule: Design a generic storage entity called Silo. It must contain a fixed array capable of holding exactly 100 items of any one specific data type.
+    
     Rule: Include an integer tracking the current count. Write an addCrop(item) method that adds an item to the array, but silently ignores the action if the Silo is full.
     
     2. The Crop System:
     
     Rule: Create a general concept Crop that requires a calculateYield() method. Create specific Wheat and Corn entities based on this concept.
+    
     Rule: For Corn, if its internal waterLevel variable is a negative number, calling calculateYield() must halt execution and signal a standard C++ system runtime error containing the exact text "Drought failure".
     
     3. System Execution (Main):
 
     Rule: In main(), instantiate a Silo that is capable of holding polymorphic pointers to the general Crop concept.
+    
     Rule: Dynamically create a Corn entity (with a negative water level) and add it to the Silo.
+    
     Rule: Attempt to calculate its yield, providing a safety net to safely capture the standard system error and print its internal message to the screen.
